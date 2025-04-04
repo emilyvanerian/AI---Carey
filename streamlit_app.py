@@ -24,7 +24,7 @@ st.sidebar.header("Dashboard Controls")
 target_drug = st.sidebar.selectbox(
     "Select Target Drug",
     options=analysis.drug_names,
-    index=analysis.drug_names.index("Cannabis")
+    index=0  # Default to first drug in the list
 )
 
 # Main content

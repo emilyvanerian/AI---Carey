@@ -23,7 +23,13 @@ class DrugConsumptionAnalysis:
         self.label_encoders = {}
         self.scaler = StandardScaler()
         
-    def preprocess_data(self, target_drug='Cannabis'):
+    def preprocess_data(self, target_drug=None):
+        # If no target drug specified, use the first one
+        if target_drug is None:
+            target_drug = self.drug_names[0]
+        elif target_drug not in self.drug_names:
+            raise ValueError(f"Drug {target_drug} not found. Available drugs: {', '.join(self.drug_names)}")
+
         # Encode the target variable
         self.label_encoders[target_drug] = LabelEncoder()
         y_encoded = self.label_encoders[target_drug].fit_transform(self.y[target_drug])
