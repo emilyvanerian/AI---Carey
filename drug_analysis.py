@@ -153,34 +153,3 @@ class DrugConsumptionAnalysis:
         )
         
         return fig
-
-# Initialize analysis
-analysis = DrugConsumptionAnalysis()
-
-# Preprocess data for Cannabis prediction
-X_scaled, y_encoded = analysis.preprocess_data(target_drug='Cannabis')
-
-# Train model
-model, X_train, X_test, y_train, y_test = analysis.train_model(X_scaled, y_encoded)
-
-# Evaluate model
-evaluation_results = analysis.evaluate_model(model, X_test, y_test)
-
-# Create visualizations
-feature_importance_plot = analysis.create_feature_importance_plot(model)
-correlation_heatmap = analysis.create_correlation_heatmap()
-drug_usage_plot = analysis.create_drug_usage_distribution()
-personality_plot = analysis.create_personality_distribution()
-
-# Save plots
-feature_importance_plot.write_html('templates/feature_importance.html')
-correlation_heatmap.write_html('templates/correlation_heatmap.html')
-drug_usage_plot.write_html('templates/drug_usage.html')
-personality_plot.write_html('templates/personality_traits.html')
-
-# Print model evaluation metrics
-print('\nModel Evaluation Metrics for Cannabis Prediction:')
-print('\nConfusion Matrix:')
-print(evaluation_results['confusion_matrix'])
-print('\nClassification Report:')
-print(pd.DataFrame(evaluation_results['classification_report']).transpose())
